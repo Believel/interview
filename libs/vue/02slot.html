@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <base-layout>
+            <!-- <template v-slot:header>
+                <h1>this is header</h1>
+            </template> -->
+            <!-- 具名插槽缩写 -->
+            <template #header>
+                <h1>this is header</h1>
+            </template>
+            <template v-slot:default="{user:person}">
+                <p>this is a content</p>
+                <p>{{person.name}}</p>
+            </template>
+        </base-layout>
+    </div>
+
+    <script>
+        // 父级模板里的所有内容都是在父级作用域中编译的；子模板里的所有内容都是在子作用域中编译的。
+        Vue.component('base-layout', {
+            template: `
+                <div class="container">
+                    <header>
+                        <slot name="header"></slot>
+                    </header>
+                    <main>
+                        <slot :user="user"></slot>
+                    </main>
+                </div>
+            `,
+            data() {
+                return {
+                    user: {
+                        name: 'xxx'
+                    }
+                }
+            }
+        })
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                name: 'hello'
+            },
+            methods: {
+
+            },
+            computed: {
+
+            },
+            watch: {
+
+            },
+            components: {
+
+            }
+        })
+    </script>
+</body>
+
+</html>

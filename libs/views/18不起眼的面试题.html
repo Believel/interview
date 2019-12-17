@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>不起眼的面试题</title>
+</head>
+
+<body>
+    <script>
+        // for (var i = 0; i < 5; i++) {
+        //     setTimeout(function () {
+        //         console.log(new Date, i) // 每隔1s输出5，总共输出5个5
+        //     }, 1000)
+        // }
+        // console.log(new Date, i) // 5
+
+        // for (var i = 0; i < 5; i++) {
+        //     (function (j) {
+        //         setTimeout(function () {
+        //             console.log(new Date, j)
+        //         }, 1000)
+        //     })(i)
+        // }
+        // console.log(new Date, i)
+
+        // var output = function (i) {
+        //     setTimeout(function () {
+        //         console.log(new Date, i);
+        //     }, 1000);
+        // };
+
+        // for (var i = 0; i < 5; i++) {
+        //     // JS中基本类型的参数传递是按值传递的
+        //     output(i); // 这里传过去的 i 值被复制了
+        // }
+
+        // console.log(new Date, i);
+
+        // ES6的块级作用域
+        // for (let i = 0; i < 5; i++) {
+        //     setTimeout(function () {
+        //         console.log(new Date, i);
+        //     }, 1000);
+        // }
+
+        // console.log(new Date, i);
+
+        // JS中的定时器触发时机有可能是不确定的
+        // for (var i = 0; i < 5; i++) {
+        //     (function (j) {
+        //         setTimeout(function () {
+        //             console.log(new Date, j);
+        //         }, 1000 * j); // 这里修改 0~4 的定时器时间
+        //     })(i);
+        // }
+
+        // setTimeout(function () { // 这里增加定时器，超时设置为 5 秒
+        //     console.log(new Date, i);
+        // }, 1000 * i);
+
+        // 异步处理
+        // const tasks = [];
+        // for (var i = 0; i < 5; i++) { // 这里 i 的声明不能改成 let，如果要改该怎么做？
+        //     ((j) => {
+        //         tasks.push(new Promise((resolve) => {
+        //             setTimeout(() => {
+        //                 console.log(new Date, j);
+        //                 resolve(); // 这里一定要 resolve，否则代码不会按预期 work
+        //             }, 1000 * j); // 定时器的超时时间逐步增加
+        //         }));
+        //     })(i);
+        // }
+
+        // Promise.all(tasks).then(() => {
+        //     setTimeout(() => {
+        //         console.log(new Date, i);
+        //     }, 1000); // 注意这里只需要把超时设置为 1 秒
+        // });
+
+        // const tasks = []
+        // for (let i = 0; i < 5; i++) {
+        //     tasks.push(new Promise((resolve) => {
+        //         setTimeout(() => {
+        //             console.log(new Date, i)
+        //             resolve();
+        //         }, 1000 * i)
+        //     }))
+        // }
+        // Promise.all(tasks).then(() => {
+        //     setTimeout(() => {
+        //         console.log(new Date, i) // i is not defined
+        //     }, 1000)
+        // })
+
+        // 利用async await解决
+        // const sleep = (ms) => new Promise((resolve) => {
+        //     setTimeout(resolve, ms)
+        // });
+        // (async () => {
+        //     for (var i = 0; i < 5; i++) {
+        //         await sleep(1000)
+        //         console.log(new Date, i)
+        //     }
+        //     await sleep(1000)
+        //     console.log(new Date, i)
+        // })()
+
+        // 蚂蚁金服面试题
+        var scope = 'global'
+
+        function checkscope() {
+            var scope = 'local'
+
+            function f() {
+                return scope
+            }
+            return f;
+        }
+        // console.log(checkscope()())
+        var foo = checkscope()
+        console.log(foo())
+    </script>
+</body>
+
+</html>

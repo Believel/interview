@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>bind</title>
+</head>
+
+<body>
+    <script>
+        // 1. 改变原函数的this指向，即绑定上下文，返回原函数的拷贝
+        // 2. 当绑定函数被调用时，bind的额外参数将置于实参之前传递给被绑定的方法
+        // 3. 注意，一个绑定函数也能使用new操作符创建对象，这种行为就像把原函数当成构造器，thisArg参数无效。也就是new操作符修改this指向的优先级更高。
+
+        // 输入：接受一个或者多个参数，第一个是要绑定的上下文，额外参数当做绑定函数的前置参数。
+        // 输出：返回原函数的拷贝，即返回一个函数，这个函数呢具备原函数的功能。
+        Function.prototype.myBind = function (thisArg) {
+            if (typeof this !== 'function') {
+                return;
+            }
+            var _self = this;
+            var args = Array.prototype.slice.call(arguments, 1);
+            return function () {
+                return _self.apply(thisArg, args.concat(Array.prototype.slice.call(arguments)))
+            }
+        }
+
+        function foo(name) {
+            this.name = name;
+        }
+        // 上下文 功能
+        var obj = {};
+        var bar = foo.myBind(obj)
+        // bar('jack')
+        // console.log(obj.name)
+
+        // 参数 功能
+        // var obj = {};
+        // var tar = foo.myBind(obj, 'rose');
+        // tar()
+        // console.log(obj.name)
+
+        // new 功能
+        var alice = new bar('alice')
+        console.log(obj.name)
+        console.log(alice.name)
+
+
+        Function.prototype.myBind2 = function () {
+            var self = this, // 保存原函数
+                context = [].shift.call(arguments), // 需要绑定的this上下文
+                args = [].slice.call(arguments); // 剩余的参数转成数组
+            return function () { // 返回一个新函数
+                // 执行新函数的时候，会把之前传入的context当做新函数体内的this
+                // 并且结合两次分别传入的参数，作为新函数的参数
+                self.apply(context, [].concat.call(args, [].slice.call(arguments)))
+            }
+
+        }
+    </script>
+</body>
+
+</html>

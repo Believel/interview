@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- <script>
+        function Foo() {
+            getName = function () {
+                alert(1);
+            };
+            return this;
+        }
+
+        function getName() {
+            alert(5);
+        }
+        var getName;
+        Foo.getName = function () {
+            alert(2);
+        };
+        Foo.prototype.getName = function () {
+            alert(3);
+        };
+        getName = function () {
+            alert(4);
+        };
+        //请写出以下输出结果：
+        Foo.getName(); // 2
+        getName(); // 4
+        Foo().getName(); // 1
+        getName(); // 1
+        new Foo.getName(); // 2
+        new Foo().getName(); // 3
+        new new Foo().getName(); // 3
+    </script> -->
+    <script>
+        // 把一个数组中所有0都放到后面排列
+        let arr = [0, 0, 0, 0, 0, 1]
+        let num = 0;
+        for (let i = 0, len = arr.length; i < len; i++) {
+            if (arr[i] === 0) {
+                num++;
+            } else if (num !== 0) {
+                arr[i - num] = arr[i];
+                arr[i] = 0
+            }
+        }
+        console.log(arr)
+    </script>
+</body>
+
+</html>

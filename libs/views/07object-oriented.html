@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>面向对象</title>
+</head>
+
+<body>
+    <script>
+        // 类与实例
+        // 类与继承
+
+        // 类的声明
+        // 方式1
+        function Animal() {
+
+        }
+
+        // 方式2
+        class Animal2 {
+            constructor() {
+
+            }
+        }
+
+        // 实现继承
+        // 1. 借助构造函数
+        function A() {
+            this.name = 'zpp'
+        }
+        A.prototype.age = 12
+
+        function B() {
+            // 在调用B的实例时，改变A的this指向挂载到B上,但是A原型链上的东西并没有被B继承
+            A.call(this)
+            this.type = 'B'
+        }
+        console.log(new B())
+        // 2. 原型链实现继承
+        function AA() {
+            this.play = [1, 2, 3]
+        }
+        AA.prototype.age = '25'
+
+        function BB() {}
+        BB.prototype = new AA();
+        var p1 = new BB()
+        var p2 = new BB();
+        console.log(p1.play, p2.play)
+        p1.play.push(4)
+        console.log(p1.play, p2.play)
+        // 缺点：创建多个不同的对象，但是如果是引用类型，其中一个改变，就会影响其他的对象中对应的这个变量的值
+        // 3. 组合方式
+        function AAA() {
+            this.play = [1, 2, 3]
+        }
+        AAA.prototype.age = '25'
+
+        function BBB() {
+            AAA.call(this)
+        }
+        // 缺点：父级的构造函数执行了两次
+        // BBB.prototype = new AAA();
+        // 优化组合方式
+        BBB.prototype = AAA.prototype;
+        // 不能直接赋值，因为这样赋值相当于AAA.prototype中的constrctor也被修改，是引用类型
+        // BBB.prototype.constructor = BBB;
+
+        var p1 = new BBB()
+        var p2 = new BBB();
+        console.log(p1.play, p2.play)
+        p1.play.push(4)
+        console.log(p1.play, p2.play)
+        // 优化之后还有什么缺点,无法准备说谁是谁的实例
+        console.log(p1 instanceof BBB, p1 instanceof AAA)
+        console.log(p1.constructor) // AAA, ? 是因为AAA.prototype里面有一个constructor属性
+
+        // 组合优化方式2（最终版）
+        function AAAA() {
+            this.play = [1, 2, 3]
+        }
+        AAAA.prototype.age = 23
+
+        function BBBB() {
+            AAAA.call(this)
+        }
+        // Object.create(null)创建一个空对象
+        // Object.create(obj)创建一个对象，并且这个对象的原型是obj
+        BBBB.prototype = Object.create(AAAA.prototype)
+        BBBB.prototype.constructor = BBBB;
+        var p3 = new BBBB()
+        var p4 = new BBBB()
+        p3.play.push(7)
+        console.log(p3.play, p4.play)
+        console.log(p3.constructor)
+    </script>
+</body>.
+
+</html>

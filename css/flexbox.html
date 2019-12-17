@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>flexBox</title>
+  <style>
+    ul {
+      list-style: none;
+      padding: 15px;
+      border: 1px solid #ddd;
+      color: #ffffff;
+    }
+    .flex-container {
+      display: flex;
+      /* flex-direction: row;
+      flex-wrap: nowrap; */
+      /* flex-flow 是 flex-direction 和 flex-wrap 的组合 */
+      flex-flow: row nowrap;
+      /* 对齐方式(父容器x轴) */
+      justify-content: flex-start;
+      /* 对齐方式(父容器y轴) */
+      align-items: flex-start;
+      /* 只针对子容器多行排列时，设置行与行之间的对齐方式，对单行无效 */
+      align-content: flex-start;
+    }
+    li:nth-child(1) {
+      width: 70px;
+      height: 70px;
+      background: #0ea5c6;
+    }
+    li:nth-child(2) {
+      width: 100px;
+      height: 30px;
+      background: #ffc60b;
+    }
+    li:nth-child(3) {
+      width: 150px;
+      height: 100px;
+      background: #ff5733;
+    }
+    li:nth-child(4) {
+      width: 300px;
+      height: 140px;
+      background: #e4406f;
+    }
+    li:nth-child(5) {
+      width: 150px;
+      height: 100px;
+      background: #07456f;
+    }
+    .flex-item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+    .flex-item1 {
+      /* 改变子容器的排列顺序，覆盖HTML代码中的顺序，默认值是0，可以是负值，数值越小排列越靠前。 */
+      order: 0;
+      /* 父容器剩余空间按 1:2 的比例分配给子容器 */
+      flex-grow: 0;
+      flex-shrink: 1;
+      /* 在不伸缩的情况下子容器的原始尺寸。主轴为横向时代表宽度，主轴为纵向时代表高度 */
+      flex-basis: auto;
+      align-self: stretch;
+    }
+  </style>
+</head>
+<body>
+  <ul class="flex-container">
+    <li class="flex-item flex-item1">item-1</li>
+    <li class="flex-item">item-2</li>
+    <li class="flex-item">item-3</li>
+    <li class="flex-item">item-4</li>
+    <li class="flex-item">item-5</li>
+  </ul>
+</body>
+</html>

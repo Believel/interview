@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>原型、构造函数、实例、原型链</title>
+</head>
+
+<body>
+    <script>
+        // 1. 创建对象的方法
+        var o1 = {
+            a: 1
+        }
+        var o2 = new Object({
+            a: 2
+        })
+
+        function O(a) {
+            this.a = a
+        }
+        var o3 = new O(3)
+        var o4 = Object.create(null)
+
+        // 2. 原型、构造函数、实例、原型链
+        // 原型：一个实例的__proto__就是原型
+        // 构造函数：通过function定义，并且构造函数的prototype.constructor是构造函数本身
+        // 实例：通过new 构造函数返回的就是一个实例
+        // 原型链：一个实例和原型对象，通过__proto__建立起来的链接就组成一个原型链
+        // 3. instanceof原理
+        //      判断对象的类型
+        console.log([] instanceof Array)
+
+        // L表示左表达式，R表示右表达式
+        function instanceof_of(L, R) {
+            var O = R.prototype; // 取 R 的显示原型
+            var L = L.__proto__; // 取 L 的隐式原型
+            while (true) {
+                if (L === null) {
+                    return false;
+                }
+                if (O === L) {
+                    return true;
+                }
+                L = L.__proto__;
+            }
+        }
+        console.log(instanceof_of([], Array))
+        console.log(Object instanceof Object); //true 
+        console.log(Function instanceof Function); //true 
+        console.log(Number instanceof Number); //false 
+        console.log(String instanceof String); //false 
+
+        console.log(Function instanceof Object); //true 
+
+        console.log(Foo instanceof Function); //true 
+        console.log(Foo instanceof Foo); //false
+        // 4. new运算符
+        // a: 创建一个对象实例，并且这个对象继承自构造函数的原型的属性和方法
+        // b: 构造函数被执行
+        // c:如果构造函数返回了一个对象，那么这个对象会取代整个new出来的结果。如果构造函数没有返回对象，那么new出来的结果就是步骤1创建出来的对象
+        function new2(func) {
+            var o = Object.create(func.prototype)
+            var k = func.call(o);
+            if (typeof k === 'object') {
+                return k;
+            } else {
+                return o
+            }
+        }
+    </script>
+</body>
+
+</html>

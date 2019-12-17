@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>diff算法</title>
+</head>
+
+<body>
+    <script>
+        /**
+         * 主要功能比对两个VNode节点，将差异更新到视图上
+         * oldVnode: 旧节点
+         * vnode: 新节点
+         * parentElm: 父节点的element
+         */
+        function patch(oldVnode, vnode, parentElm) {
+            // 老的节点不存在就直接添加
+            if (!oldVnode) {
+                addVnodes(parentElm, null, vnode, 0, vnode.length - 1);
+            } else if (!vnode) {
+                // 新节点不存在，相当于要把老节点删除
+                removeVnodes(parentElm, oldVnode, 0, oldVnode.length - 1);
+            } else {
+                // 新旧节点都存在，并且是相同的节点
+                if (sameVnode(oldVNode, vnode)) {
+                    // 比对VNode
+                    patchVnode(oldVNode, vnode);
+                } else {
+                    // 不是相同的节点，就删除老节点，增加新节点
+                    removeVnodes(parentElm, oldVnode, 0, oldVnode.length - 1);
+                    addVnodes(parentElm, null, vnode, 0, vnode.length - 1);
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

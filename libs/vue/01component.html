@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <base-input :label="'姓名'" :value="name" @input="handleInput"></base-input>
+        <p>{{name}}</p>
+        <base-checkbox v-model="lovingVue" v-on:focus.native="onFocus"></base-checkbox>
+    </div>
+
+    <script>
+        Vue.component('base-input', {
+            inheritAttrs: false,
+            props: ['label', 'value'],
+            template: `
+                <label>
+                {{ label }}
+                <input
+                    v-bind="$attrs"
+                    v-bind:value="value"
+                    v-on:input="$emit('input', $event.target.value)"
+                >
+                </label>
+            `
+        })
+        // 自定义组件的v-model
+        Vue.component('base-checkbox', {
+            model: {
+                prop: 'checked',
+                event: 'change'
+            },
+            props: {
+                checked: Boolean
+            },
+            template: `
+                <input
+                type="checkbox"
+                v-bind:checked="checked"
+                v-on:change="$emit('change', $event.target.checked)"
+                >
+            `
+        })
+        // 将原生事件绑定到组件中
+        // ？？？？？
+
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                labelName: '姓名',
+                name: 'zpp',
+                lovingVue: true
+            },
+            methods: {
+                handleInput(value) {
+                    this.name = value
+                },
+                onFocus() {
+                    console.log(11)
+                }
+            },
+            computed: {
+
+            },
+            watch: {
+
+            },
+            components: {
+
+            }
+        })
+    </script>
+</body>
+
+</html>

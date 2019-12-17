@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>通信类</title>
+</head>
+
+<body>
+    <script>
+        // 什么是同源策略及限制
+        // a: 概念：协议、域名、或者端口不同
+        // b：限制：ajax无法通信，localStorage,cookie,无法读取，DOM无法获得
+        // 前后端如何通信
+        // a: ajax
+        // b: websocket
+        // c: CORS
+        // 如何创建Ajax
+        // a: var xhr = new XMLHttpRequest()
+        // b: xhr.open('url','GET')
+        // c: get:key&value
+        // d: 如果是post:设置请求头，并send数据
+        // e: 接收响应，处理响应的数据
+        // 跨域通信的几种方式
+        // jsonp
+        // Hash
+
+        // postMessage跨域适合于同一页面的不同窗体(iframe)，
+        // a: 首先先获取iframe对象，（ <iframe id="child" src="http://localhost:3001"></iframe>）document.getElementById('child').contentWindow;
+        // b: 发送消息： frame.postMessage('收到信息：' + msg + ' --from 3000 port！😨', 'http://localhost:3001');
+        // c: 监听消息：
+        // window.addEventListener('message', function(event) {console.log(event.data)}, false);
+
+        // Websocket
+
+        // CORS:(cross-origin resource sharing)跨域资源共享
+        //  a: 后台设置：res.set('Access-Control-Allow-Origin', 'http://localhost:3000') 设置允许跨域的地址
+    </script>
+    <script src="../js/util.js"></script>
+</body>
+
+</html>

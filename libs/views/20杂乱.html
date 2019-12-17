@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>杂乱</title>
+    </head>
+
+    <body>
+        <ul>
+            <li>编号1,点击我请弹出1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+        </ul>
+        <script>
+            var list = document.getElementsByTagName("li");
+            for (var i = 0; i < list.length; i++) {
+                list[i].addEventListener(
+                    "click",
+                    (function(i) {
+                        return function() {
+                            alert(i + 1);
+                        };
+                    })(i),
+                    true
+                );
+            }
+        </script>
+        <script>
+            // function A(name) {
+            //     this.name = name;
+            // }
+            // A.prototype.getName = function () {
+            //     console.log(this.name)
+            // }
+
+            // function B(name) {
+            //     A.call(this, name)
+            // }
+            // B.prototype = Object.create(A.prototype)
+            // B.prototype.constructor = B
+
+            // let b = new B('zpp')
+            // console.log(B.prototype.constructor) // A
+
+            // class A {
+            //     constructor(name) {
+            //         this.name = name
+            //     }
+            //     getName() {
+            //         console.log(this.name)
+            //     }
+            // }
+            // class B extends A {
+            //     constructor(name) {
+            //         super(name)
+            //     }
+            // }
+            // let bb = new B('tgd')
+            // bb.getName()
+            // 闭包：
+
+            // for (var i = 0; i < 5; i++) {
+            //     setTimeout(function () {
+            //         console.log(i)
+            //     }, 1000)
+            // }
+            // 面试题
+            // function foo(a) {
+            //     a = a * 10;
+            // }
+
+            // function bar(b) {
+            //     b.value = 'new';
+            // }
+            // var a = 1;
+            // var b = {
+            //     value: 'old'
+            // };
+            // foo(a);
+            // bar(b);
+            // console.log(a); // 1
+            // console.log(b); // new
+
+            // f(fn, fn, fn, fn)(m)
+            // function f() {
+            //     let arr = Array.from(arguments)
+            //     return function () {
+            //         let arg = arguments[0]
+            //         return arr.reduce((x, y) => {
+            //             if (x === arr[0]) {
+            //                 x = x(arg)
+            //             }
+            //             return y(x)
+            //         })
+            //     }
+            // }
+            // console.log(f(function (n) {
+            //     return n + 1
+            // }, function (n) {
+            //     return n + 2
+            // })(2))
+
+            // forEach
+            // Array.prototype.forEach = function (fn, n) {
+            //     for (var i = 0; i < this.length; i++) {
+            //         if (this[i] === n) {
+            //             return false;
+            //         } else {
+            //             fn(this[i], i, this)
+            //         }
+            //     }
+            // };
+            // [1, 2, 3].forEach((value, index) => {
+            //     console.log(value)
+            // }, 2)
+
+            // map
+            // Array.prototype.map = function (fn) {
+            //     let res = []
+            //     for (var i = 0; i < this.length; i++) {
+            //         res.push(fn(this[i], i, this))
+            //     }
+            //     return res;
+            // };
+            // let arr = [1, 2, 3]
+            // console.log(arr.map((item, index) => {
+            //     return item * 2
+            // }))
+            // console.log(arr)
+
+            // function myFun(myobj) {
+            //     myobj.name = 'xxx'
+            // }
+            // let outerobj = {
+            //     name: 'jjj'
+            // }
+            // myFun(outerobj)
+            // console.log(outerobj.name)
+            // alert(new Function())
+
+            // // 动物
+            // function Animal() {
+            //     this.eat = function () {
+            //         console.log('animal eat')
+            //     }
+            // }
+            // // 狗
+            // function Dog() {
+            //     this.bark = function () {
+            //         console.log('dog bark')
+            //     }
+            // }
+            // Dog.prototype = new Animal()
+            // // 哈士奇
+            // var hashiqi = new Dog()
+
+            // class Animal {
+            //     constructor() {}
+            //     eat() {
+            //         console.log('animal eat')
+            //     }
+            // }
+            // class Dog extends Animal {
+            //     constructor() {
+            //         super()
+            //     }
+            //     bark() {
+            //         console.log('dog bark')
+            //     }
+            // }
+            // var hashiqi = new Dog()
+            // console.log(Dog.prototype.constructor === Dog)
+
+            // const map = new Map();
+            // const obj = {
+            //     p: 'hello world'
+            // }
+            // map.set(obj, '123')
+            // console.log(map.get(obj))
+            // console.log(map.has(obj))
+            // console.log(map.delete(obj))
+            // console.log(map.has(obj))
+
+            // 一个事件类型对应回调函数的数据设计
+
+            // 数组去重
+            Array.prototype.unique = function() {
+                let temp = {},
+                    res = [];
+                this.forEach(function(i) {
+                    !temp[i] && res.push(i) && (temp[i] = true);
+                });
+                return res;
+            };
+            console.log([1, 2, 2, 2, 3, 3].unique());
+        </script>
+        <div id="app">
+            <input type="text" id="txt" />
+            <p id="show-txt"></p>
+        </div>
+        <script>
+            var obj = {};
+            Object.defineProperty(obj, "txt", {
+                get: function() {
+                    return obj;
+                },
+                set: function(newValue) {
+                    document.getElementById("txt").value = newValue;
+                    document.getElementById("show-txt").innerHTML = newValue;
+                }
+            });
+            document.addEventListener("keyup", function(e) {
+                obj.txt = e.target.value;
+            });
+
+            function foo() {
+                console.log(arguments);
+                console.log([].slice.call(arguments, 0));
+            }
+            foo(1, 2, 3);
+        </script>
+    </body>
+</html>

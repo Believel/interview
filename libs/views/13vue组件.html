@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue组件</title>
+</head>
+
+<body>
+    <div id="app">{{name}}</div>
+    <script src="https://cdn.bootcss.com/vue/2.6.6/vue.min.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                name: 'zpp'
+            }
+        }).$mount()
+
+        // Vue组件分类
+        // 1. 由vue-router产生的每个页面，它本质上就是一个组件
+        // 2. 基础组件
+        // 3. 业务组件
+    </script>
+</body>
+
+</html>

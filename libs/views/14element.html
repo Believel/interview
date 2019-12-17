@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue组件</title>
+</head>
+
+<body>
+    <!-- <div id="app">{{name}}</div>
+    <script src="https://cdn.bootcss.com/vue/2.6.6/vue.min.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                name: 'zpp'
+            }
+        }).$mount()
+
+        // Vue组件分类
+        // 1. 由vue-router产生的每个页面，它本质上就是一个组件
+        // 2. 基础组件
+        // 3. 业务组件
+    </script> -->
+
+    <div id="box" style="background-color: red;">
+        <p>你好</p>
+        zpp
+        <input type="text" value="123" id="btn">
+    </div>
+    <script>
+        var box = document.getElementById('box');
+        // console.log(box.nodeName) // 返回该节点大写字母的标签名
+        // console.log(box.nodeType) // 返回该结点的节点类型，1表示元素节点，2表示属性节点
+        // console.log(box.childNodes) // 返回元素的子节点的nodeslist对象
+        // console.log(box.firstChild) //  返回元素的第一个子节点(包含注释节点和文本节点)
+        // console.log(box.parentNode) // 返回该节点的父节点
+        // console.log(box.firstElementChild) // 返回第一个子元素(不包括文本节点以及注释节点) <p>你好</p>
+        // console.log(box.lastElementChild) // 返回最后一个子元素(不包括文本节点以及注释节点)
+        // console.log(box.clientHeight, box.clientWidth) // 返回内容的可视高度/宽度(不包括边框，边距或滚动条)
+        // console.log(box.style.backgroundColor)
+        // console.log(box.attributes) // 获得元素属性的集合
+        // var attrs = box.attributes
+        // Array.prototype.forEach.call(attrs, function (attr) {
+        //     // 拿到属性的名字
+        //     console.log(attr.name)
+        //     // 拿到属性的值
+        //     console.log(attr.value)
+        // })
+        document.getElementById('btn').addEventListener('input', function (e) {
+            console.log(e.target.value)
+        })
+    </script>
+</body>
+
+</html>

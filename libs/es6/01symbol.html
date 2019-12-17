@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>symbol</title>
+</head>
+
+<body>
+    <script>
+        // Symbol: 处理对象的属性是唯一
+        // var s = Symbol('a')
+        // var s2 = Symbol('a')
+        // console.log(s == s2)// false
+        // Set:类似数组，但是不会有重复的值，添加值是不会发生类型转换
+        // const set = new Set([1, 2, 2, 3, 3])
+        // console.log([...new Set('abcac')].join(""))
+        // Map：为了解决传统对象上只能用字符串当做键，它类似对象，也是键值对的集合，但是键的范围不限于字符串。
+        // const m = new Map()
+        // const o = {
+        //     p: 'hello wolrd'
+        // }
+        // m.set(o, 'content')
+        // console.log(m.get(o))
+
+        // Proxy用于修改某些操作的默认行为，等同于在语言层面做出修改。代理器
+        // target：所要拦截的目标对象
+        // handler参数也是一个对象，用于定制拦截的行为。
+        // var proxy = new Proxy(target, handler)
+        // var proxy = new Proxy({}, {
+        //     get: function (target, key) {
+        //         return 35
+        //     }
+        // })
+        // Proxy对象可以拦截对象的任意属性
+
+        // Reflect对象的方法与Proxy对象的方法一一对应，只要是Proxy对象的方法，就能在Reflect对象上找到对应的方法。
+        var obj = new Proxy({}, {
+            get: function (target, key, receiver) {
+                return Reflect.get(target, key, receiver)
+            },
+            set: function (target, key, value, receiver) {
+                return Reflect.set(target, key, value, receiver)
+            }
+        })
+    </script>
+</body>
+
+</html>

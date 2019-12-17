@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>列表</title>
+    <style>
+        .list {
+            list-style: none;
+        }
+
+        .list li {
+            padding: 10px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <ul class="list">
+        <li>这是列表1<span class="del">X</span></li>
+        <li>这是列表2<span class="del">X</span></li>
+        <li>这是列表3<span class="del">X</span></li>
+        <li>这是列表4<span class="del">X</span></li>
+        <li>这是列表5<span class="del">X</span></li>
+        <li>这是列表6<span class="del">X</span></li>
+    </ul>
+    <ul class="list">
+        <li>这是第二个列表1<span class="del">X</span></li>
+        <li>这是第二个列表2<span class="del">X</span></li>
+        <li>这是第二个列表3<span class="del">X</span></li>
+        <li>这是第二个列表4<span class="del">X</span></li>
+        <li>这是第二个列表5<span class="del">X</span></li>
+        <li>这是第二个列表6<span class="del">X</span></li>
+    </ul>
+    <script>
+        class ContainerList {
+            constructor(el) {
+                this.arrlist = Array.from(document.querySelectorAll(el))
+                let self = this;
+                this.arrlist.forEach((node) => {
+                    node.addEventListener('click', function (e) {
+                        // 当前点击的元素
+                        if (e.target.className.indexOf('del') > -1) {
+                            self.removeItem.call(self, e.target)
+                        }
+                    })
+                })
+
+            }
+            removeItem(target) {
+                let self = this;
+                let findNode = function (node) {
+                    let parent = node.parentNode;
+                    let root = self.arrlist.find(item => item === parent)
+                    if (root) {
+                        root.removeChild(node)
+                    } else {
+                        findNode(parent)
+                    }
+                }
+                findNode(target)
+            }
+        }
+        window.addEventListener('DOMContentLoaded', function () {
+            new ContainerList('.list')
+        })
+    </script>
+</body>
+
+</html>

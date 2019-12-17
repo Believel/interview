@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>类型转换</title>
+</head>
+
+<body>
+    <script>
+        // []-> string: ''
+        // []-> number: 0
+        console.log([] + []) // ''
+        console.log([] + {}) // [object Object]
+        // 直接在控制台输出：{}+[] -> 0,因为{}被理解成复合语句，因此相当于{};+[] -> '' -> 0
+        // console.log({}+[]),js中把()当成是一个表达式，因此{}被理解成"[object Object]",所以结果是"[object Object]"+""
+        console.log({} + []) // [object Object]
+        console.log({} + {}) // [object Object][object Object]
+        console.log(true + true) // 2
+        console.log(1 + {
+            a: 1
+        }) // 1[object Object]
+    </script>
+</body>
+
+</html>

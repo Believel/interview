@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>数组去重的方法</title>
+</head>
+
+<body>
+    <script>
+        //问题1：每隔一秒 打印数组的中的数据
+        let arr = [1, 17, 8, 12],
+            len = arr.length,
+            index = 0;
+        let timer = setInterval(function () {
+            if (index >= len) {
+                clearInterval(timer)
+            } else {
+                console.log(arr[index])
+            }
+            index++;
+        }, 1000)
+
+        // 问题二：实现数组去重
+        // 方法1： Set去重
+        Array.prototype.unique1 = function () {
+            return Array.from(new Set(this))
+        }
+        var arr1 = [1, 1, 'true', true, 15, 15, false, false, undefined, undefined]
+        // console.log(arr1.unique1())
+
+        // 方法2：利用for嵌套for，然后splice去重
+        Array.prototype.unique2 = function () {
+            for (var i = 0; i < this.length; i++) {
+                for (var j = i + 1; j < this.length; j++) {
+                    if (this[i] === this[j]) {
+                        this.splice(j, 1);
+                        j--;
+                    }
+                }
+            }
+            return this;
+        }
+        // console.log(arr1.unique2())
+        // 方法3：利用indexOf去重
+        Array.prototype.unique3 = function () {
+            if (!Array.isArray(this)) {
+                console.log('type error');
+                return;
+            }
+            var res = [];
+            for (let i = 0, len = this.length; i < len; i++) {
+                if (res.indexOf(this[i]) === -1) {
+                    res.push(this[i])
+                }
+            }
+            return res;
+        }
+        console.log(arr1.unique3())
+        // 
+    </script>
+</body>
+
+</html>

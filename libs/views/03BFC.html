@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        html * {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 父子外边距重叠 -->
+    <section class="parent">
+        <style>
+            .parent {
+                background: red;
+                /* 解决办法1：BFC：块级格式化上下文 */
+                /* overflow: hidden; */
+
+                /* 方法2：父级使用padding,子级不设置margin */
+                padding-top: 10px;
+            }
+
+            /* .child {
+                margin-top: 10px;
+                height: 100px;
+                background: gray;
+            } */
+
+            .child {
+                height: 100px;
+                background: gray;
+            }
+        </style>
+        <div class="child"></div>
+    </section>
+    <!-- 垂直外边距重叠 -->
+    <section class="parent2">
+        <style>
+            .parent2 {
+                background: red;
+            }
+
+            .parent2 p {
+                margin: 10px auto 25px;
+                background: pink;
+                height: 20px;
+            }
+
+            .parent2 .box {
+                overflow: hidden
+            }
+        </style>
+        <p>1</p>
+        <div class="box">
+            <p>2</p>
+        </div>
+        <p>3</p>
+    </section>
+    <!-- BFC和浮动，两栏布局：左边固定宽度，右边自适应 -->
+
+    <section class="container">
+        <style>
+            .container .left {
+                float: left;
+                width: 100px;
+                height: 100px;
+                background: pink;
+            }
+
+            .container .right {
+                overflow: hidden;
+                height: 110px;
+                background: blue;
+            }
+        </style>
+        <div class="left">
+        </div>
+        <div class="right"></div>
+    </section>
+
+    <!-- BFC可以清除浮动,所以BFC中的子元素即使是float也会参与高度计算 -->
+    <section id="float">
+        <style>
+            #float {
+                background: red;
+                /* float: left; */
+                /* overflow: auto; */
+                overflow: hidden;
+            }
+
+            #float div {
+                float: left;
+                font-size: 30px;
+            }
+        </style>
+        <div>
+            我是浮动元素
+        </div>
+    </section>
+</body>
+
+</html>

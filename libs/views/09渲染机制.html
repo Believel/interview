@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 渲染机制
+        // 1. DOCTYPE
+        // 文档类型模型
+
+        // 2. 浏览器渲染流程
+        // a: HTML->DOM
+        // b: CSS->CSSOM
+        // c: 上面两步结合形成render tree
+        // d: 开始painting
+
+        // 3. reflow  重排
+        //      * DOM结构中的各个元素都有自己的盒子，这些都需要浏览器根据各种样式来计算并根据计算结果将元素放到它该出现的位置，这个过程称为reflow
+        //      * 如何触发reflow
+        //      a: DOM节点的删除，修改，添加
+        //      b: 移动DOM的位置，或者搞个动画的时候
+        //      c: 当你修改CSS样式的时候
+        //      d: 当你resize窗口，或者滚动的时候
+        //      e: 当你修改网页的默认字体的时候
+        // 4. repaint 重绘
+        //      * 颜色或者字体大小
+        // 5. 布局layout
+
+        // JS运行机制
+        // a: 题目一，js是单线程，执行顺序是从上到下，但是碰到异步任务会挂起，等同步任务执行完之后再执行异步任务
+        // console.log(1)
+        // setTimeout(function () {
+        //     console.log(2)
+        // }, 0)
+        // console.log(3)
+        //  b: 题目二: 只输出a,页面一直在转
+        // console.log('a')
+        // while (true) {
+
+        // }
+        // console.log('b')
+
+        // c: 题目三
+        for (var i = 0; i < 4; i++) {
+            (function (j) {
+                setTimeout(function () {
+                    console.log(j) // 输出0 1 2 3 
+                }, 0)
+            })(i)
+        }
+        // 页面性能
+        // a: 资源压缩合并，减少HTTP请求
+        // b: 非核心代码异步加载，
+        //      * 异步加载的方式：defer:等HTML解析完成后执行，如果是多个，按照加载的顺序依次加载；            async:加载完之后立即执行，如果是多个，加载顺序和执行顺序无关。
+        // c: 利用浏览器的缓存
+        //      * 强缓存
+        //      * 协商缓存
+        // d: CDN
+        // e: 预解析DNS
+
+        // 错误监控
+        // a:前端错误监控的分类
+        //      * 即使运行错误：代码错误
+        //      * 资源加载错误
+        // b:错误的捕获方式
+        //      * 即使运行错误的捕获方式：1. try ...catch  2. winow.onerror
+        //      * 资源加载错误的捕获方式：1. Object.onerror 2. performace.getEntries 3.             Error事件捕获
+        //      * 问题：跨域的js错误可以捕获吗，错误提示是什么，应该怎么处理
+        //          i: 可以拿到错误信息Script error., 在script标签中增加属性crossorigin;设置响应头Access-Control-Allow-Origin:*
+        // c:上报错误的基本原理
+        //      * 采用Ajax通信上报
+        //      * 利用new Image 对象上报((new Image()).src = 'http://baidu.com/tesjk?r=tksjk';)
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MVVM框架</title>
+</head>
+
+<body>
+    <script>
+        // 1. 了解MVVM框架吗
+
+        // 2. 谈谈你对MVVM的认识
+        //      * MVVM与MVC最大的区别是实现了view和Model的自动同步，当Model的属性改变的时候，我们不在手动的操作dom，而是改变属性后对应的view层显示会改变
+        // 3. 双向绑定的原理，可以写出来吗
+        //    Object.defineProperty()
+        //  * 正向：获得数据->直接更新视图
+        //  * 反向：当数据通过事件改变时->直接找到这个变量改变就行
+        var obj = {
+            name: ''
+        }
+        var bvalue;
+        Object.defineProperty(obj, 'name', {
+            configurable: true,
+            enumerable: true,
+            set: function (value) {
+                bvalue = value
+                console.log('set')
+            },
+            get: function () {
+                console.log('get')
+                return value
+            }
+        })
+        obj.name = 'zpp'
+        // 4. 使用了什么设计模式
+        //  * 观察者模式
+        // 5. 生命周期是什么
+
+        // 6. 源码了解吗？
+    </script>
+</body>
+
+</html>

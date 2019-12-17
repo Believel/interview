@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>设计模式</title>
+    <style>
+        body {
+            text-align: center;
+        }
+
+        ol {
+            list-style: none;
+        }
+
+        ol li {
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h4 id="title">javascript设计模式</h4>
+    <ol>
+        <li>工厂模式：处理对象中相同方法和属性，但是返回的对象不明确</li>
+        <li>单例模式：可以实例化，并且只实例化一次，创建一个全局变量</li>
+        <li>模块模式:为单例模式添加私有变量，减少全局变量的使用</li>
+        <li>代理模式</li>
+        <li>职责链模式</li>
+        <li>命令模式</li>
+        <li>模板方法模式</li>
+        <li>策略模式</li>
+        <li>发布-订阅者模式</li>
+        <li>中介者模式</li>
+    </ol>
+    <script>
+        var Parent = function (name) {
+            this.name = name;
+            this.intance = null;
+        }
+        Parent.prototype.sayHello = function () {
+            return this.name;
+        }
+
+        function getIntance(name) {
+            if (!this.intance) {
+                this.intance = new Parent(name)
+            }
+            return this.intance;
+        }
+        var p1 = getIntance('qq')
+        var p2 = getIntance('ww')
+        console.log(p2.sayHello())
+        console.log(p1 === p2)
+    </script>
+
+    <script>
+        var createWindow = (function () {
+            var div;
+            return function () {
+                if (!div) {
+                    div = document.createElement('div')
+                    div.innerHTML = '我是弹窗的内容'
+                    div.style.display = 'none'
+                    document.body.appendChild(div)
+                    return div;
+                }
+            }
+        })()
+        document.getElementById('title').onclick = function () {
+            var win = createWindow();
+            win.style.display = 'block'
+        }
+    </script>
+</body>
+
+</html>

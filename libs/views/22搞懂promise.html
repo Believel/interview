@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>promise</title>
+</head>
+
+<body>
+    <script>
+        // pending(进行中)  fulfilled(已成功) rejected(已失败)
+        // Promise是一个构造函数，用来生成Promise实例
+        // const promise = new Promise((resolve, reject) => {
+
+        // })
+        // promise.then(function (value) {
+        //     // success
+        // }, function (value) {
+        //     // failure
+        // })
+
+        function timeout(ms) {
+            return new Promise((resolve, reject) => {
+                setTimeout(reject, ms, 'done')
+            })
+        }
+        timeout(1000).then(function (value) {
+            console.log(value)
+        }).catch(function (value) {
+            console.log(value)
+        }).finally(function () {
+            console.log(1)
+        })
+        // 构造函数的方法
+        // Promise.all()
+        // Promise.resolve()  将现有对象转为Promise对象,该对象是resolved状态
+        // Promise.reject() 返回一个Promise实例，该实例是rejected状态
+
+        // 实例方法
+        // promise.prototype.then
+        // promise.prototype.catch 
+        // promise.prototype.finally
+        // Promise.prototype.finally = function (callback) {
+        //     let P = this.constructor;
+        //     return this.then(
+        //         value => P.resolve(callback()).then(() => value),
+        //         reason => P.resolve(callback()).then(() => {
+        //             throw reason
+        //         })
+        //     );
+        // };
+
+        // let p = Promise.resolve('hello')
+        // p.then((value) => {
+        //     console.log(value)
+        // })
+        // let p2 = Promise.reject('出错了')
+        // p2.then(null).catch((value) => {
+        //     console.log(value)
+        // })
+
+        let promise = new Promise((resolve, reject) => {
+            resolve(12)
+        })
+        promise.then((value) => {
+            return Promise.reject(value)
+        }).then(null, (value) => {
+            return Promise.resolve(value)
+        }).then((value) => {
+            console.log(value)
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>promise</title>
+</head>
+
+<body>
+    <script>
+        // Promise是异步处理的一种解决方案
+        // const promise = new Promise(function (resolve, reject) {
+        // })
+
+        // Promise新建后就会立即执行!!!!!!
+        // let promise = new Promise(function (resolve, reject) {
+        //     console.log('promise')
+        //     resolve()
+        // })
+        // promise.then(() => {
+        //     console.log('resolved')
+        // })
+        // console.log('Hi')
+        // promise
+        // Hi
+        // resolved
+
+        // 调用resolve或reject并不会终结Promise的参数函数的执行
+        new Promise((resolve, reject) => {
+            resolve(1);
+            console.log(2);
+        }).then(r => {
+            console.log(r);
+        });
+        // 2
+        // 1
+
+        // Iterator 遍历器是一种接口，为各种不同的数据结构提供统一的访问机制。
+    </script>
+</body>
+
+</html>

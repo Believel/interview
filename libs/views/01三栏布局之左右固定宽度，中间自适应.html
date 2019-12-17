@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>三栏布局</title>
+    <style>
+        html * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .layout {
+            margin-top: 20px;
+        }
+
+        .layout article>div {
+            min-height: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 浮动，绝对定位，网格布局高度超出会溢出 -->
+    <!-- 弹性盒子布局，表格布局高度超出不会溢出 -->
+    <section class="layout float">
+        <style media="screen">
+            .layout.float .left {
+                float: left;
+                width: 300px;
+                background: blue;
+            }
+
+            .layout.float .right {
+                float: right;
+                width: 300px;
+                background: pink;
+            }
+
+            .layout.float .center {
+                overflow: hidden;
+                background: yellow;
+            }
+        </style>
+        <article class="left-right-center">
+            <div class="left"></div>
+            <div class="right"></div>
+            <div class="center">
+                <h1>1、这是浮动的解决方案</h1>
+                <p>增加高度各方案引发的问题</p>
+                <p>增加高度各方案引发的问题</p>
+                <p>增加高度各方案引发的问题</p>
+                <p>增加高度各方案引发的问题</p>
+                <p>增加高度各方案引发的问题</p>
+                <p>增加高度各方案引发的问题</p>
+            </div>
+        </article>
+    </section>
+    <section class="layout position">
+        <style>
+            .layout.position .left {
+                position: absolute;
+                left: 0;
+                width: 300px;
+                background: blue;
+            }
+
+            .layout.position .center {
+                position: absolute;
+                left: 300px;
+                right: 300px;
+                background: yellow;
+            }
+
+            .layout.position .right {
+                position: absolute;
+                right: 0;
+                width: 300px;
+                background: pink;
+            }
+        </style>
+        <article class="left-right-center">
+            <div class="left"></div>
+            <div class="center">
+                <h1>2、这是绝对定位的解决方案</h1>
+                <p>增加高度各方案引发的问题</p>
+                <p>增加高度各方案引发的问题</p>
+                <p>增加高度各方案引发的问题</p>
+                <p>增加高度各方案引发的问题</p>
+                <p>增加高度各方案引发的问题</p>
+                <p>增加高度各方案引发的问题</p>
+            </div>
+            <div class="right"></div>
+        </article>
+    </section>
+    <section class="layout flex">
+        <style media="screen">
+            .layout.flex {
+                margin-top: 140px;
+            }
+
+            .layout.flex article {
+                display: flex;
+            }
+
+            .layout.flex .left {
+                flex: 0 0 300px;
+                width: 300px;
+                background: blue;
+            }
+
+            .layout.flex .center {
+                flex: 1;
+                background: yellow;
+            }
+
+            .layout.flex .right {
+                flex: 0 0 300px;
+                width: 300px;
+                background: pink;
+            }
+        </style>
+        <article class="left-right-center">
+            <div class="left"></div>
+            <div class="center">
+                <h1>3、这是弹性布局的解决方案</h1>
+                <p>增加高度各方案引发的问题</p>
+                <p>增加高度各方案引发的问题</p>
+                <p>增加高度各方案引发的问题</p>
+                <p>增加高度各方案引发的问题</p>
+                <p>增加高度各方案引发的问题</p>
+                <p>增加高度各方案引发的问题</p>
+            </div>
+            <div class="right"></div>
+        </article>
+    </section>
+    <section class="layout table">
+        <style>
+            .layout.table .left-right-center {
+                display: table;
+                width: 100%;
+                height: 100px;
+            }
+
+            .layout.table .left-right-center>div {
+                display: table-cell;
+            }
+
+            .layout.table .left {
+                width: 300px;
+                background: blue;
+            }
+
+            .layout.table .center {
+                background: yellow;
+            }
+
+            .layout.table .right {
+                width: 300px;
+                background: pink;
+            }
+        </style>
+        <article class="left-right-center">
+            <div class="left"></div>
+            <div class="center">
+                <h1>4、这是表格布局解决方案</h1>
+                <p>增加高度各方案引发的问题</p>
+                <p>增加高度各方案引发的问题</p>
+                <p>增加高度各方案引发的问题</p>
+                <p>增加高度各方案引发的问题</p>
+                <p>增加高度各方案引发的问题</p>
+                <p>增加高度各方案引发的问题</p>
+                <p>增加高度各方案引发的问题</p>
+            </div>
+            <div class="right"></div>
+        </article>
+    </section>
+    <section class="layout grid">
+        <style>
+            .layout.grid .left-right-center {
+                display: grid;
+                width: 100%;
+                grid-template-rows: 100px;
+                grid-template-columns: 300px auto 300px;
+            }
+
+            .layout.grid .left {
+                background: blue;
+            }
+
+            .layout.grid .right {
+                background: pink;
+            }
+
+            .layout.grid .center {
+                background: yellow;
+            }
+        </style>
+        <article class="left-right-center">
+            <div class="left"></div>
+            <div class="center">
+                <h1>5、这是网格布局的解决方案</h1>
+                <p>增加高度各方案引发的问题</p>
+                <p>增加高度各方案引发的问题</p>
+                <p>增加高度各方案引发的问题</p>
+                <p>增加高度各方案引发的问题</p>
+                <p>增加高度各方案引发的问题</p>
+                <p>增加高度各方案引发的问题</p>
+            </div>
+            <div class="right"></div>
+        </article>
+    </section>
+</body>
+
+</html>
