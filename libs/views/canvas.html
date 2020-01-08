@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>canvas</title>
+</head>
+<body>
+  <!-- 绘图效果的标签 -->
+  <canvas id="myCanvas" width="600" height="400"></canvas>
+  <script>
+    var cv = document.getElementById('myCanvas');
+    var ctx = cv.getContext('2d');
+    ctx.moveTo(100, 100); // 设置绘制起点，必须设置否则不起作用
+    ctx.lineTo(200, 100); // 从100,100到200,100绘制一条线段
+    ctx.stroke();// 描边
+
+  </script>
+</body>
+</html>
