@@ -17,8 +17,8 @@
 // }
 
 // 3、var -> let
-for (let k = 0; k < 5; k++) {
-    setTimeout(() => {
-        console.log(k)
-    }, 1000)
-}
+// for (let k = 0; k < 5; k++) {
+//     setTimeout(() => {
+//         console.log(k)
+//     }, 1000)
+// }
