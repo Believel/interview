@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>CSS分割线实现方法</title>
+  <style>
+    /* css分割线（伪元素+transform） */
+    .title {
+      position: relative;
+      text-align: center;
+      overflow: hidden;
+      font-size: 14px;
+      color: #999;
+    }
+    .title::before, .title::after {
+      content: '';
+      display: inline-block;
+      width: 100%;
+      height: 1px;
+      position: absolute;
+      background-color: #ccc;
+      top: 50%;
+    }
+    .title::before {
+      margin-left: -10px;
+      transform: translate(-100%);
+    }
+    .title::after {
+      margin-left: 10px;
+    }
+
+    /* 伪元素+flex    觉得线太粗*/
+    .title2 {
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+      color: #999;
+    }
+    .title2::before,.title2::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background-color: rgba(204,204,204,.6);
+    }
+    .title2::before{
+        margin-right: 10px;
+    }
+    .title2::after{
+        margin-left: 10px;
+    }
+
+    .title3{
+        text-align: center;
+        font-size: 14px;
+        color: #999;
+        overflow: hidden;
+    }
+    .inner{
+        position: relative;
+    }
+    .inner::before,.inner::after{
+        position: absolute;
+        content: '';
+        width: 9999px;
+        height: 1px;
+        background: #ccc;
+        top: 50%;
+    }
+    .inner::before{
+        right: 100%;
+        margin-right: 10px;
+    }
+    .inner::after{
+        margin-left: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="title"> 我是分割线</div>
+  <div class="title2">我是分割线</div>
+  <div class="title3">
+    <span class="inner">我是分割线</span>
+</div>
+<script>
+  let template = '我是{{name}}，年龄{{age}}，性别{{sex}}';
+  let data = {
+    name: '姓名',
+    age: 18
+  } 
+  function render(template, data) {
+    let reg =  /\{\{(.+?)\}\}/;
+    let match;
+    while(match = reg.exec(template)) {
+      template = template.replace(match[0], data[match[1]])
+    }
+    return template;
+  }
+
+
+
+  // ------------------------ 正则表达式学习 -------------------------------------------
+  // 惰性匹配是尽可能少的匹配   这里表达的意思就是匹配两个之后就不在匹配了
+  // 量词后面加问号可以实现惰性匹配
+  // var regex = /\d{2,5}?/g
+  // var str = '123 1234 12345 123456'
+
+  // var regex = /#([0-9a-fA-F]{6}|[0-9a-fA-F]{3})/g
+  // var str = '#ffbbad #Fc01DF #FFF #ffE';
+
+  // var str = '<div id="container" class="main"></div>'
+  // var reg = /id="[^"]*"/;
+  
+  // \b  是单词边界  就是\w和\W之间的位置，\w是数字，字符串，下划线中的任何一个字符[0-9a-zA-Z]
+  // var result = "[JS] lesson_01.mp4".replace(/\b/g, '#')
+
+  // 表示l前面的位置(?=p)，p表示子模式
+  // var result = 'hello'.replace(/(?=l)/g, '#')
+
+  // 数字的千位分隔符表示法
+  // var str = "123456789";
+  // var reg = /(?!^)(?=(\d{3})+$)/g
+  // console.log(str.replace(reg, ','))
+
+  // 验证密码
+  // var reg = /^[0-9a-zA-Z]{6, 12}$/
+
+  // (?=.*[0-9])^  
+  // 上面表示开头前面还有个位置，(?=.*[0-9])表示该位置后面的字符匹配.*[0-9],即，有任何多个任意字符，后面再跟个数字
+  // var reg = /(?=.*[0-9])^[0-9A-Za-z]{6,12}$/   // 必须包含数字
+
+
+  // !正则表达式括号的作用
+  // var reg = /(\d{4})-(\d{2})-(\d{2})/;
+  // var str = "2017-06-12"
+  // var result = str.replace(reg, "$2/$3/$1")
+  // var result = str.replace(reg, function() {
+  //   return RegExp.$2 + '/' + RegExp.$3 + '/' + RegExp.$1
+  // })
+  // var result = str.replace(reg, function(match, year, month, day) {
+  //   return month + '/' + day + '/' + year
+  // })
+
+  // 反向引用
+  // \1 表示引用之前那个分组
+  // var reg = /\d{4}(-|\/|\.)\d{2}\1\d{2}/;
+  // var string1 = "2017-06-12";
+  
+
+  var str = "my name is apple";
+  function title(str) {
+    // 思路是找到每个单词的首字母
+    return str.toLowerCase().replace(/(?:^|\s)\w/g, function(c) {
+      return c.toUpperCase()
+    })
+  }
+  console.log(title(str))
+
+  // 第四章 正则表达式回溯法原理
+
+
+
+  // console.log(result)
+</script>
+</body>
+</html>
