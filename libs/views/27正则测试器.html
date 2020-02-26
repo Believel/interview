@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>正则测试器</title>
+  <style>
+    section {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      height: 300px;
+      padding: 0 200px;
+    }
+    section * {
+      min-height: 30px;
+    }
+    #err {
+      color: red;
+    }
+    #result {
+      line-height: 30px;
+    }
+    .info {
+      background: #00c5ff;
+      padding: 2px;
+      margin: 2px;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+  <section>
+    <div id="err"></div>
+    <input type="text" placeholder="请输入正则表达式" id="regex">
+    <input type="text" placeholder="请输入测试文本" id="text">
+    <button id="run">测试一下</button>
+    <div id="result"></div>
+  </section>
+  <script>
+    (function() {
+      let regexInput = document.getElementById('regex');
+      let textInput = document.getElementById('text');
+      let runBtn = document.getElementById('run')
+      let errBox = document.getElementById('err');
+      let resultBox = document.getElementById("result");
+      
+      runBtn.onclick = function() {
+        errBox.innerHTML = '';
+        resultBox.innerHTML = ''
+
+        var text = textInput.value;
+        var regex = regexInput.value;
+        if(regex === '') {
+          errBox.innerHTML = '请输入正则表达式'
+        } else if(text === '') {
+          errBox.innerHTML = "请输入测试文本"
+        } else {
+          regex = createRegex(regex);
+          if (!regex) return;
+          var result, results = [];
+
+          if(regex.global) {
+            while (result = regex.exec(text)) {
+              results.push(result)
+            }
+          } else {
+            results.push(regex.exec(text))
+          }
+          if (results[0] === null) {
+            resultBox.innerHTML = '匹配到0个结果';
+            return;
+          }
+          for (let i = results.length -1; i >= 0; i--) {
+            // item是一个数组，即是regex.exec(text)函数执行的结果
+            let item = results[i];
+            // 拿到匹配的结果
+            let match = item[0];
+            let prefix = text.substr(0, item.index);
+            let suffix = text.substr(item.index + match.length);
+            text = prefix + '<span class="info">' + match + '</span>' + suffix
+
+          }
+          
+          resultBox.innerHTML = "匹配到" + results.length + "个结果：<br>" + text
+        }
+      }
+      // 生成正则表达式
+      function createRegex(regex) {
+        try {
+          if (regex[0] === '/') {
+            regex = regex.split('/');
+            // 去除前面的空字符串
+            regex.shift();
+            // 拿到最后一个字符
+            var flag = regex.pop();
+            regex = regex.join('/');
+            regex = new RegExp(regex, flag);
+          } else {
+            regex = new RegExp(regex, 'g')
+          }
+          return regex;
+        } catch (error) {
+          errBox.innerHTML = '无效的正则表达式'
+          return false
+        }
+      }
+    })()
+  </script>
+</body>
+</html>

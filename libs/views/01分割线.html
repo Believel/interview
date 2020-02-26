@@ -148,20 +148,90 @@
   // var string1 = "2017-06-12";
   
 
-  var str = "my name is apple";
-  function title(str) {
-    // 思路是找到每个单词的首字母
-    return str.toLowerCase().replace(/(?:^|\s)\w/g, function(c) {
-      return c.toUpperCase()
-    })
-  }
-  console.log(title(str))
+  // var str = "my name is apple";
+  // function title(str) {
+  //   // 思路是找到每个单词的首字母
+  //   return str.toLowerCase().replace(/(?:^|\s)\w/g, function(c) {
+  //     return c.toUpperCase()
+  //   })
+  // }
+  // console.log(title(str))
 
   // 第四章 正则表达式回溯法原理
 
+    // 把字符串转为对象
+    // let str = 'user.name.firstname=Bob&user.name.lastname=Smith&user.favoritecolor=Light%20Blue'
+    // str  = decodeURIComponent(str);
+    // function strToObj(str) {
+    //   // let reg = /([\w\.=%\s]+)/g;
+    //   let reg = /([^&]+)/g;
+    //   let strObj = {}
+    //   let list = str.match(reg)
+    //   list.forEach((v) => {
+    //     let arr  = v.split('=')[0].split('.');
+    //     let last = v.split('=')[1];
+    //     let len = arr.length, temp = strObj;
+    //     arr.forEach((item, index) => {
+    //       if(index === len - 1) {
+    //         temp[item] = last
+    //       } else {
+    //         !temp[item] ? temp = temp[item] = {} : temp = temp[item];
+    //       }
+    //     })
+    //   })
+    //   return strObj;
+    // }
+    
+    // console.log(strToObj(str))
+    
+    // 转化成
+    // const strObj = {
+    //     user: {
+    //         name: {
+    //             firstname: 'Bob',
+    //             lastname: 'Smith'
+    //         },
+    //         favoritecolor: 'Light Blue'
+    //     }
+    // }
 
+    
+    // let str = 'candy';
+    // let reg = /^(?:can|candy)$/
+    // console.log(str.match(reg))
 
-  // console.log(result)
+    
+    // 字符串转化成对象
+    // var s = 'user.name.firstname=Bob&user.name.lastname=Smith&user.favoritecolor=Light%20Blue';
+    // var res = {};
+
+    // s.replace(/([^=&]+|(?==))(=?)([^&]*)/g, function (m, key, eq, val) {
+    //   var path = decodeURIComponent(key).split(".");
+    //   key = path.pop();
+    //   val = eq ? decodeURIComponent(val) : true;
+      
+    //   var obj = res;
+
+    //   for (var q=0; q<path.length; ++q) {
+    //     obj = obj[path[q]] = obj[path[q]] || {};
+    //   }
+
+    //   obj[key] = val;
+    // });
+
+    // console.log(res);
+
+    // var str = '2,3,5'
+    // let result = str.replace(/(\d),(\d),(\d)/, '$3=$1+$2')
+    // console.log(result)
+
+    var str = 'char-code-at'
+    let result = str.replace(/([a-z])[a-z]+-?/g, function(match, p1) {
+      return p1.toUpperCase() + match.substr(1) 
+    })
+    console.log(result)
+  
+
 </script>
 </body>
 </html>
