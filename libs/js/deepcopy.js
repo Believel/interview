@@ -20,3 +20,31 @@ arr[1] = "2"
 copyarr[2][0] = 4
 console.log(copyarr)
 console.log(arr)
+
+// 判断是否是对象
+function isObject(o) {
+    return  (typeof o === 'object' || typeof o === 'function') && o !== null
+}
+// 深拷贝方法实现
+function deepClone(obj) {
+    if (!isObject(obj)) throw new Error('非对象');
+    let isArray = Array.isArray(obj)
+    let newObj = isArray ? [...obj] : {...obj};
+    Object.keys(newObj).forEach(key => {
+        newObj[key] = isObject(obj[key]) ? deepClone(obj[key]): obj[key];
+    })
+    return newObj;
+}
+let obj = {
+    a: [1, 2, 3],
+    b: {
+      c: 2,
+      d: 3
+    },
+    e: function() {
+        console.log(11)
+    }
+  }
+  let newObj = deepClone(obj)
+  newObj.b.c = 4;
+  console.log(obj)
