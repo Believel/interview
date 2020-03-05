@@ -14,8 +14,9 @@
 // let p = new children('zpp')
 // console.log(p.getName())
 // console.log(children)
-// 寄生组合继承
 
+
+// 寄生组合继承
 // function Person(name) {
 //     this.name = name
 // }
@@ -35,10 +36,11 @@
 //     }
 // })
 // const child = new Child('zpp')
-// console.log(child)
+// console.log(child);
 
 
 // class实现继承
+// class的本质就是函数
 class Person {
     constructor(value) {
         this.value = value
@@ -54,4 +56,5 @@ class Children extends Person {
     }
 }
 const p = new Children(1)
-console.log(p)
+console.log(p.getValue())
+console.log(p instanceof Person)
