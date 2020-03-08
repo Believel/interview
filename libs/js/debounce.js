@@ -1,7 +1,6 @@
-/**
- * 防抖和节流
- */
-// 防抖和节流的作用都是防止函数多次调用。区别在，假设一个用户一直触发这个函数，且每次触发函数的间隔小于wait,防抖的情况下只会调用一次，而节流的情况会每隔一定时间(参数wait)调用函数
+// 防抖场景：一个按钮点击会触发网络请求，但是我们并不希望每次点击都会发起网络请求，
+//         而是当用户点击按钮一段时间后没有再次点击的情况才去发起网络请求。
+
 
 // 这个是用来获取当前时间戳的
 function now() {
@@ -55,3 +54,15 @@ function debounce(func, wait = 50, immediate = true) {
 debounce(function () {
     console.log(1)
 })
+
+// 简易版
+
+const debounce_easy = (func, wait = 50) => {
+    let timer = null
+    return function(...args) {
+        if (timer) clearTimeout(timer)
+        timer = setTimeout(() => {
+            func.apply(this, args)
+        }, wait)
+    }
+ }
